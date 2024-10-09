@@ -1,28 +1,9 @@
-name: CI/CD Pipeline
-on:
-push:
-branches:
-- main
-pull_request:
-branches:
-- main
-jobs:
-build:
-runs-on: ubuntu-latest
-container:
-image: maven:3.8.3-openjdk-17
-steps:
-- name: Checkout code
-uses: actions/checkout@v2
-- name: Build
-run: mvn compile
-test:
-runs-on: ubuntu-latest
-needs: build
-container:
-image: maven:3.8.3-openjdk-17
-steps:
-- name: Checkout code
-uses: actions/checkout@v2
-- name: Test
-run: mvn test
+# Dockerfile
+FROM eclipse-temurin:17-jdk-alpine
+VOLUME /tmp
+LABEL version="1.0.0"
+LABEL maintainer="guillaume.nagiel@gmail.com"
+EXPOSE 9000
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} tp-spring.jar 
+ENTRYPOINT ["java","-jar","/tp-spring.jar"]
