@@ -6,4 +6,5 @@ LABEL maintainer="guillaume.nagiel@gmail.com"
 EXPOSE 9000
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} tp-spring.jar 
-ENTRYPOINT ["java","-jar","/tp.jar"]
+RUN mkdir -p /app/target
+ENTRYPOINT ["java","-jar","/tp-spring.jar"]
